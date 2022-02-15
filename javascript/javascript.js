@@ -45,7 +45,7 @@ function playRound (playerSelection, computerSelection) {
 
 function game() {
     for (let i = 0; i < 5;) {
-        let playerSelection = prompt("Make a move");
+        let playerSelection = prompt("Choose Rock Paper or Scissors.");
         if (playerSelection == null) {
             return alert("I didn't want you to play anyway.");
         } else if (playerSelection.toLowerCase() === "rock" || playerSelection.toLowerCase() === "paper" || playerSelection.toLowerCase() === "scissors") {
