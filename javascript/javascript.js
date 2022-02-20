@@ -1,74 +1,95 @@
 //VARIABLES
 let playerScore = parseInt(0);
 let computerScore = parseInt(0);
+const rockBtn = document.querySelector("#rock");
+const paperBtn = document.querySelector("#paper");
+const scissorsBtn = document.querySelector("#scissors");
+const playerSelection = [rockBtn, paperBtn, scissorsBtn];
+const button = document.querySelectorAll("img");
+const userChoiceDisplay = document.getElementById("userChoice");
+const computerChoiceDisplay = document.getElementById("computerChoice");
+const result = document.getElementById("result");
+const total = document.getElementById("total");
+const computerScoreDisplayed = document.getElementById("computerScore");
+const playerScoreDisplayed = document.getElementById("userScore");
 
-//PLAYERSELECTION FUNCTION
-function playerChoice () {
-    playerSelection = prompt("Rock Paper or Scissors?").toLowerCase();
-}
-
-
-//COMPUTERPLAY FUNCTION
-function computerPlay () {
-    let randomNumber = Math.floor(Math.random()* 3);
-    if (randomNumber == 0) {
-        return "rock";
-    } else if (randomNumber == 1) {
-        return "paper";
-    } else {
-        return "scissors";
-    }
-}
-
-//PLAYROUND FUNCTION
-function playRound (playerSelection, computerSelection) {
-    if (playerSelection == "rock" && computerSelection == "paper") {
-        computerScore++;
-        return `You Lose! ${computerSelection} beats ${playerSelection}.`;
-    } else if (playerSelection == "paper" && computerSelection == "scissors") {
-        computerScore++;
-        return `You Lose! ${computerSelection} beats ${playerSelection}.`;
-    } else if (playerSelection == "scissors" && computerSelection == "rock") {
-        computerScore++;
-        return `You Lose! ${computerSelection} beats ${playerSelection}.`;
-    } else if (playerSelection == computerSelection) {
-        return `It's a Tie! ${computerSelection} is the same as ${playerSelection}.`
-    }else {
-        playerScore++;
-        return `You Win! ${playerSelection} beats ${computerSelection}!`
-    }
-}
-
-//VALIDATION FUNCTION
-
-
-
-function game() {
-    for (let i = 0; i < 5;) {
-        let playerSelection = prompt("Choose Rock Paper or Scissors.");
-        if (playerSelection == null) {
-            return alert("I didn't want you to play anyway.");
-        } else if (playerSelection.toLowerCase() === "rock" || playerSelection.toLowerCase() === "paper" || playerSelection.toLowerCase() === "scissors") {
-            const computerSelection = computerPlay();
-            console.log(`${playRound(playerSelection.toLowerCase(), computerSelection)} computer's score: ${computerScore} player's score: ${playerScore}`);
-            i++;
-        } else {
-            alert(`You did NOT enter rock, paper, or scissors. Try again.`);
+//RUN GAME WHEN CLICK EVENT
+let userChoice;
+computerScoreDisplayed.innerHTML = " 0";
+playerScoreDisplayed.innerHTML = " 0";
+button.forEach(option => {
+    option.addEventListener('click', (e) => {
+        computerScoreDisplayed.innerHTML = "0";
+        userChoice = e.target.id;
+        userChoiceDisplay.innerHTML = " " + userChoice;
+        computerPlay();
+        playRound(userChoice, computerChoice);
+        if (playerScore === 5) {
+            total.innerHTML = " " + `PLAYER WINS! Player Score: ${playerScore} Computer Score: ${computerScore}`
+        } else if (computerScore === 5) {
+            total.innerHTML = " " + `COMPUTER WINS! Player Score: ${playerScore} Computer Score: ${computerScore}`
         }
-    }
+    })
+})
 
-    isWinner();
-}
-
-function isWinner() {
-    if (playerScore == computerScore) {
-        return console.log("its a tie...");
-    } else if (playerScore > computerScore) {
-        return console.log("YOU WIN!!!");
+//COMPUTER FUNCTION
+function computerPlay() {
+    let randomNumber = Math.floor(Math.random() * 3)
+    
+    if (randomNumber === 0) {
+        computerChoice = "rock";
+    } else if (randomNumber === 1) {
+        computerChoice = "paper";
     } else {
-        return console.log("YOU LOSE!!!");
+        computerChoice = "scissors";
+    }
+    computerChoiceDisplay.innerHTML = " " + computerChoice;
+}
+
+//PLAY ROUND FUNCTION 
+function playRound(userChoice, computerChoice) {
+    if (userChoice === computerChoice) {
+        userChoiceDisplay.style.color = "black";
+        computerChoiceDisplay.style.color = "black";
+        computerScoreDisplayed.innerHTML = " " + computerScore;
+        playerScoreDisplayed.innerHTML = " " + playerScore;
+        result.innerHTML = " TIE!";
+    } else if (userChoice === 'rock' && computerChoice  === 'paper') {
+        userChoiceDisplay.style.color = "red";
+        computerChoiceDisplay.style.color = "green";
+        result.innerHTML = " YOU LOSE!";
+        computerScore++
+        computerScoreDisplayed.innerHTML = " " + computerScore;
+        playerScoreDisplayed.innerHTML = " " + playerScore;
+    } else if (userChoice === 'paper' && computerChoice  === 'scissors') {
+        userChoiceDisplay.style.color = "red";
+        computerChoiceDisplay.style.color = "green";
+        result.innerHTML = " YOU LOSE!";
+        computerScore++
+        computerScoreDisplayed.innerHTML = " " + computerScore;
+        playerScoreDisplayed.innerHTML = " " + playerScore;
+    } else if (userChoice === 'scissors' && computerChoice  === 'rock') {
+        userChoiceDisplay.style.color = "red";
+        computerChoiceDisplay.style.color = "green";
+        result.innerHTML = " YOU LOSE!";
+        computerScore++
+        computerScoreDisplayed.innerHTML = " " + computerScore;
+        playerScoreDisplayed.innerHTML = " " + playerScore;
+    } else {
+        userChoiceDisplay.style.color = "green";
+        computerChoiceDisplay.style.color = "red";
+        result.innerHTML = " YOU WIN!";
+        playerScore++
+        computerScoreDisplayed.innerHTML = " " + computerScore;
+        playerScoreDisplayed.innerHTML = " " + playerScore;
     }
 }
 
-
-game();
+function showAndHide() {
+    const container = document.getElementById("container");
+    const playButton = document.getElementById("play");
+    if (container.style.display = 'none') {
+        container.style.display = 'block';
+        playButton.style.display = 'none';
+    }
+}

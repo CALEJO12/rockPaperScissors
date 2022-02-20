@@ -4,11 +4,36 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="./javascript/javascript.js"></script>
+    <script src="./javascript/javascript.js" defer></script>
     <link rel="stylesheet" href="./css/style.css">
     <title>Document</title>
 </head>
 <body>
-    
+    <div class="play-button">
+        <button id="play" onclick="showAndHide()">PLAY GAME</button>
+    </div>
+
+    <div class="container" id="container" style="display: none;">
+        <h1>First to 5 wins!</h1>
+        <div class="options">
+            <img class="button" id="rock" src="./images/rock.png" alt="">
+            <img class="button" id="paper" src="./images/paper.png">
+            <img class="button" id="scissors" src="./images/scissors.png">
+        </div>
+        <div class="choices">
+            <h2>User Choice:<span id="userChoice"></span></h2>
+            <h2>Computer Choice:<span id="computerChoice"></span></h2>
+        </div>
+        <div class="resultDisplay">
+            <h2>Decision:<span id="result"></span></h2>
+            <h2>Your Score:<span id="userScore"></span></h2>
+            <h2>Computer Score:<span id="computerScore"></span></h2>
+        
+        </div>
+        <div class="winner">
+            <h2>WINNER:<span id="total"></span></h2>
+        </div>
+    </div>
+
 </body>
 </html>
